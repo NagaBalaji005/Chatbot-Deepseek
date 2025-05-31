@@ -1,43 +1,34 @@
 # AI Chatbot
 
-A modern, responsive web-based AI chatbot interface powered by DeepSeek via OpenRouter. The interface features a sleek dark theme with a night mode aesthetic, real-time message streaming, and a beautiful user experience.
+A modern, responsive AI chatbot powered by DeepSeek via OpenRouter. Built with FastAPI and vanilla JavaScript, featuring a beautiful UI and real-time streaming responses.
 
-## 🌟 Key Features
+## 🌟 Features
 
-### User Interface
+### Frontend
 - 🌙 Modern dark theme with night mode aesthetic
-- 🎨 Beautiful UI with blur effects and gradients
 - 📱 Fully responsive design for all devices
+- 💬 Real-time message streaming
+- ⌨️ Support for markdown formatting in messages
 - ⚡ Fast and smooth animations
 - 🔄 Auto-resizing input field
 - ⌨️ Enter to send, Shift+Enter for new line
 - 📱 Mobile-optimized with safe area support
+- 🎨 Beautiful UI with blur effects and gradients
+- 🔄 Service worker for offline support
 
-### Chat Features
-- 🤖 Powered by DeepSeek AI via OpenRouter
-- 💬 Real-time message streaming
-- 📝 Support for markdown formatting in messages
-- 💻 Code block syntax highlighting
-- 🔄 Dynamic message updates
-- ⏳ Typing indicators
-- ❌ Error handling and recovery
-
-### Technical Features
-- Real-time streaming responses
-- Markdown support for rich text formatting
-- Code block syntax highlighting
-- Mobile-first responsive design
-- iOS/Android safe area support
-- Dynamic viewport handling
-- Smooth animations and transitions
-- Error handling and recovery
-- Loading states and typing indicators
+### Backend
+- 🚀 FastAPI for high performance
+- 💨 Real-time streaming responses
+- 🔒 Secure API handling
+- ⚡ Async request processing
+- 🛡️ Comprehensive error handling
+- 🔄 CORS support
+- 📝 Environment variable validation
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn
+- Python 3.8 or higher
 - OpenRouter API key
 
 ### Installation
@@ -48,11 +39,9 @@ A modern, responsive web-based AI chatbot interface powered by DeepSeek via Open
    cd ai-chatbot
    ```
 
-2. Install dependencies:
+2. Install Python dependencies:
    ```bash
-   npm install
-   # or
-   yarn install
+   pip install -r requirements.txt
    ```
 
 3. Set up your environment variables:
@@ -62,58 +51,52 @@ A modern, responsive web-based AI chatbot interface powered by DeepSeek via Open
    Then add your OpenRouter API key to the `.env` file:
    ```env
    OPENROUTER_API_KEY=your_api_key_here
-   PORT=3000
    ```
 
-4. Start the development server:
+4. Run the development server:
    ```bash
-   npm run dev
-   # or
-   yarn dev
+   uvicorn api.chat:app --reload
    ```
 
-5. Open your browser and navigate to `http://localhost:3000`
+5. Open your browser and navigate to `http://localhost:8000`
 
 ## 🛠️ Project Structure
 
 ```
-ai-chatbot/
-├── public/
-│   ├── index.html      # Main HTML file
-│   └── background.jpg  # Background image
-├── src/
-│   ├── api/           # API integration
-│   ├── styles/        # CSS styles
-│   └── utils/         # Utility functions
-├── .env.example       # Example environment variables
-├── package.json       # Project dependencies
-└── README.md         # Project documentation
+Chatbot/
+├── public/                    # Static files
+│   ├── index.html            # Main HTML file
+│   ├── background.jpg        # Background image
+│   ├── favicon.ico          # Favicon
+│   └── sw.js                # Service worker
+│
+├── api/                      # Backend API
+│   ├── chat.py              # Python chat endpoint
+│   └── runtime.txt          # Python runtime version
+│
+├── config.py                 # Configuration file
+├── requirements.txt          # Python dependencies
+├── test_api.py              # API tests
+├── test_stream.py           # Stream tests
+├── README.md                # Project documentation
+├── .gitignore               # Git ignore rules
+└── vercel.json              # Vercel configuration
 ```
 
 ## 🔧 Configuration
 
 ### Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `OPENROUTER_API_KEY` | Your OpenRouter API key | - |
-| `PORT` | Server port | 3000 |
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `OPENROUTER_API_KEY` | Your OpenRouter API key | Yes |
 
-### UI Customization
+### API Endpoints
 
-The interface can be customized by modifying the CSS variables in `public/index.html`:
-
-```css
-:root {
-    --primary-color: #007AFF;
-    --primary-color-dark: rgba(0, 86, 204, 0.8);
-    --bg-message-user: rgba(0, 122, 255, 0.7);
-    --bg-message-bot: rgba(255, 255, 255, 0.15);
-    --text-color: white;
-    --border-color: rgba(255, 255, 255, 0.2);
-    --error-color: rgba(255, 59, 48, 0.9);
-}
-```
+- `GET /`: Frontend interface
+- `POST /api/chat`: Chat endpoint
+- `GET /health`: Health check
+- `GET /api/info`: API information
 
 ## 📱 Mobile Support
 
@@ -123,28 +106,33 @@ The application is fully responsive and optimized for mobile devices:
 - Responsive layout
 - Mobile-optimized input handling
 - Dynamic viewport adjustments
-
-## 🔒 Security
-
-- API keys are stored securely in environment variables
-- HTTPS support for production
-- Input sanitization
-- Error handling and recovery
+- Service worker for offline support
 
 ## 🚀 Deployment
 
-### Production Build
-```bash
-npm run build
-# or
-yarn build
-```
+### Vercel Deployment
 
-### Deployment Options
-- Vercel
-- Netlify
-- GitHub Pages
-- Any static hosting service
+1. Fork this repository
+2. Create a new project on Vercel
+3. Connect your repository
+4. Add environment variables in Vercel dashboard
+5. Deploy!
+
+### Other Platforms
+
+The application can be deployed on any platform that supports Python/FastAPI applications:
+- Heroku
+- DigitalOcean
+- AWS
+- Google Cloud
+- Azure
+
+## 🧪 Testing
+
+Run the test suite:
+```bash
+python -m pytest test_api.py test_stream.py
+```
 
 ## 🤝 Contributing
 
@@ -161,9 +149,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - Powered by [DeepSeek](https://deepseek.com) via [OpenRouter](https://openrouter.ai)
-- Built with modern web technologies
-- Inspired by modern chat interfaces
+- Built with [FastAPI](https://fastapi.tiangolo.com/)
+- Frontend built with vanilla JavaScript
 
-## 📞 Support
-
-For support, please open an issue in the GitHub repository or contact the maintainers.
+- Made by naga balaji
+- linkedin - [www.linkedin.com/in/adapala-naga-balaji-339b4131a]
