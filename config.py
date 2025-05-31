@@ -5,7 +5,7 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 
 # Model Configuration
-MODEL = os.getenv("MODEL", "deepseek/deepseek-chat")
+MODEL = os.getenv("MODEL", "deepseek/deepseek-chat-v3")
 MAX_TOKENS = int(os.getenv("MAX_TOKENS", "8000"))
 TEMPERATURE = float(os.getenv("TEMPERATURE", "0.7"))
 
