@@ -73,7 +73,7 @@ Chatbot/
 ├── api/                      # Backend API
 │   ├── chat.py              # Python chat endpoint
 │   └── runtime.txt          # Python runtime version
-│
+├── .env                     # environment variables
 ├── config.py                 # Configuration file
 ├── requirements.txt          # Python dependencies
 ├── test_api.py              # API tests
@@ -152,5 +152,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Built with [FastAPI](https://fastapi.tiangolo.com/)
 - Frontend built with vanilla JavaScript
 
-- Made by naga balaji
+- Made by naga balaji ❤️
 - linkedin - [www.linkedin.com/in/adapala-naga-balaji-339b4131a]
