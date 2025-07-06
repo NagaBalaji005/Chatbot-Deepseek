@@ -38,8 +38,13 @@ try:
     else:
         logger.info(f"OPENROUTER_API_KEY found: {OPENROUTER_API_KEY[:8]}...")
 
-    MODEL = os.getenv("MODEL", "deepseek/deepseek-chat")
+    MODEL = os.getenv("CHAT_MODEL") or os.getenv("MODEL") or "meta-llama/llama-3-8b-instruct"
     MAX_TOKENS = int(os.getenv("MAX_TOKENS", "8000"))
+
+    # Optional: Adjust MAX_TOKENS to a lower value to avoid exceeding credits
+    # For example, set to 5000 tokens if you know your credit limit is lower
+    if MAX_TOKENS > 5425:
+        MAX_TOKENS = 5425
     TEMPERATURE = float(os.getenv("TEMPERATURE", "0.7"))
 
     logger.info(f"Configuration: MODEL={MODEL}, MAX_TOKENS={MAX_TOKENS}, TEMPERATURE={TEMPERATURE}")
@@ -260,11 +265,18 @@ async def api_chat(message: ChatMessage, request: Request):
                                 
                                 if response.status == 401:
                                     error_message = "Authentication failed - invalid API key"
-                                    error_detail = f"Authentication failed. API Key: {OPENROUTER_API_KEY[:8]}..."
+                                    error_detail = f"Authentication failed. API Key: {(OPENROUTER_API_KEY[:8] + '...') if OPENROUTER_API_KEY else '[not set]'}"
                                     logger.error(error_detail)
                                 elif response.status == 429:
                                     error_message = "Rate limit exceeded. Please try again later."
                                     error_detail = "The OpenRouter API rate limit has been exceeded"
+                                elif response.status == 402:
+                                    error_message = "Payment required - insufficient credits"
+                                    error_detail = (
+                                        "This request requires more credits, or fewer max_tokens. "
+                                        "Please visit https://openrouter.ai/settings/credits to upgrade your account."
+                                    )
+                                    logger.error(error_detail)
                                 
                                 error_response = {
                                     "status": "error",
